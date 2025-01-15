@@ -294,6 +294,10 @@
             background-color: #f5f5f5;
         }
 
+        .müptezeller {
+            background-color: #f5f5f5;
+        }
+
         .nisa {
             background-color: #ffebcd;
         }
@@ -385,6 +389,18 @@
                     { url: "https://i.hizliresim.com/lps1939.jpg", caption: "Nisa - 7" },
                     { url: "https://i.hizliresim.com/puhylp9.jpg", caption: "Nisa - 8" },
                     { url: "https://i.hizliresim.com/ik2nw6g.jpg", caption: "Nisa - 9" }
+                ],
+                "müptezeller": [
+                    { url: "https://i.hizliresim.com/qygbmqx.jpg", caption: "Müptezeller - 1" },
+                    { url: "https://i.hizliresim.com/qbywswa.jpg", caption: "Müptezeller - 2" },
+                    { url: "https://i.hizliresim.com/k49p8lt.jpg", caption: "Müptezeller - 3" },
+                    { url: "https://i.hizliresim.com/kk6zdtw.jpg", caption: "Müptezeller - 4" },
+                    { url: "https://i.hizliresim.com/3aycrhu.jpg", caption: "Müptezeller - 5" },
+                    { url: "https://i.hizliresim.com/nf8su6d.jpg", caption: "Müptezeller - 6" },
+                    { url: "https://i.hizliresim.com/74d9t5z.jpg", caption: "Müptezeller - 7" },
+                    { url: "https://i.hizliresim.com/gghbggd.jpg", caption: "Müptezeller - 8" },
+                    { url: "https://i.hizliresim.com/lgdkqw3.jpg", caption: "Müptezeller - 9" },
+                    { url: "https://i.hizliresim.com/nyr3ayh.jpg", caption: "Müptezeller - 10" }
                 ]
             };
 
@@ -434,6 +450,53 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Giriş Sistemi</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function handleCredentialResponse(response) {
+            const data = jwt_decode(response.credential);
+            console.log(data); // Kullanıcı bilgilerini görmek için
+            alert(`Hoş geldin, ${data.name}`);
+            // Burada kullanıcı bilgilerini işleyebilir ve sunucunuza gönderebilirsiniz.
+        }
+
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: "YOUR_GOOGLE_CLIENT_ID", // Buraya kendi istemci kimliğinizi ekleyin
+                callback: handleCredentialResponse
+            });
+            google.accounts.id.renderButton(
+                document.getElementById("signInDiv"), // Butonun yerleşeceği öğe
+                { theme: "outline", size: "large" } // Butonun tasarımı
+            );
+            google.accounts.id.prompt(); // Otomatik giriş için
+        };
+    </script>
+</head>
+<body>
+    <h1>Google ile Giriş Yap</h1>
+    <div id="signInDiv"></div>
+</body>
+</html>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Müptezeller</title>
+    <style>
+        #content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
 
 
 
