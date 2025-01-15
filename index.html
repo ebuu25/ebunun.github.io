@@ -349,16 +349,20 @@
                     { url: "https://i.hizliresim.com/i7rdml8.jpg", caption: "Kaya - 6" },
                     { url: "https://i.hizliresim.com/6xfzvhz.jpg", caption: "Kaya - 7" },
                     { url: "https://i.hizliresim.com/9nmf7n3.jpg", caption: "Kaya - 8" },
-                    { url: "https://i.hizliresim.com/fa520s2.jpg", caption: "Kaya - 9" }
+                    { url: "https://i.hizliresim.com/fa520s2.jpg", caption: "Kaya - 9" },
+                    { url: "https://i.hizliresim.com/ry6ofbl.jpg", caption: "Kaya - 10" },
+                    { url: "https://i.hizliresim.com/oifwahd.jpg", caption: "Kaya - 11" }
                 ],
                 "enes": [
                     { url: "https://i.hizliresim.com/rikojet.jpg", caption: "Enes - 1" },
                     { url: "https://i.hizliresim.com/g35ep9l.jpg", caption: "Enes - 2" },
                     { url: "https://i.hizliresim.com/3lnmrhd.jpg", caption: "Enes - 3" },
-                    { url: "https://i.hizliresim.com/ig189a9.jpg", caption: "Enes - 4" },
+                    { url: "https://i.hizliresim.com/mwry5e6.jpg", caption: "Enes - 4" },
                     { url: "https://i.hizliresim.com/qwfwsxq.jpg", caption: "Enes - 5" },
                     { url: "https://i.hizliresim.com/k3c0skr.jpg", caption: "Enes - 6" },
-                    { url: "https://i.hizliresim.com/g9hd5ss.jpg", caption: "Enes - 7" }
+                    { url: "https://i.hizliresim.com/g9hd5ss.jpg", caption: "Enes - 7" },
+                    { url: "https://i.hizliresim.com/ufx2cd6.jpg", caption: "Enes - 8" },
+                    { url: "https://i.hizliresim.com/3kr8cdy.jpg", caption: "Enes - 9" }
                 ],
                 "efe": [
                     { url: "https://i.hizliresim.com/ij7hrd6.jpg", caption: "Efe - 1" },
@@ -479,69 +483,11 @@
     </script>
 </head>
 <body>
-    <h1>Google ile Giriş Yap</h1>
-    <div id="signInDiv"></div>
-</body>
-</html>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Müptezeller</title>
-    <style>
-        #content {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    CREATE TABLE search_logs (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        query VARCHAR(255) NOT NULL,
-        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
-    from flask import Flask, request
-    import sqlite3
-    from datetime import datetime
-    
-    app = Flask(__name__)
-    
-    @app.route('/search')
-    def search():
-        query = request.args.get('query')
-        if query:
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            conn = sqlite3.connect('search_logs.db')
-            c = conn.cursor()
-            c.execute("INSERT INTO search_logs (query, timestamp) VALUES (?, ?)", (query, timestamp))
-            conn.commit()
-            conn.close()
-        return f"Searched for: {query}"
-    
-    if __name__ == '__main__':
-        app.run(debug=True)
-        <?php
-        if (isset($_GET['query'])) {
-            $query = htmlspecialchars($_GET['query']); // Kullanıcının aramasını alın
-            $timestamp = date('Y-m-d H:i:s');
-            
-            // Veritabanına kaydetme
-            $conn = new mysqli('localhost', 'username', 'password', 'database');
-            $stmt = $conn->prepare("INSERT INTO search_logs (query, timestamp) VALUES (?, ?)");
-            $stmt->bind_param('ss', $query, $timestamp);
-            $stmt->execute();
-            $stmt->close();
-            $conn->close();
-        }
-        ?>
-        <form method="GET" action="/search">
-            <input type="text" name="query" placeholder="Search...">
-            <button type="submit">Search</button>
-          </form>
-                  
-        
+
+
+
+
+
 
 
 
