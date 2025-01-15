@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özel Resim Galerisi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        input, button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        #images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .image-container img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border: 3px solid #ccc;
+            border-radius: 10px;
+        }
+        .image-container:hover {
+            transform: scale(1.05);
+            border: 3px solid #ff6b6b;
+        }
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 14px;
+            padding: 5px;
+            text-align: center;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content-wrapper {
+            position: relative;
+            max-width: 100%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-content {
+            max-width: 80%;
+            max-height: 80%;
+            border: 5px solid #fff;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-content:hover {
+            transform: scale(1.05);
+        }
+
+        .image-details {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        /* User-specific background styles */
+        .rabisim {
+            background-color: #f0f8ff;
+        }
+
+        .zey {
+            background-color: #fdfd96;
+        }
+
+        .kaya {
+            background-color: #ffcccb;
+        }
+
+        .enes {
+            background-color: #ffebcd;
+        }
+
+        .efe {
+            background-color: #d3ffce;
+        }
+
+        .ebu {
+            background-color: #f5f5f5;
+        }
+
+        .nisa {
+            background-color: #ffebcd;
+        }
+    </style>
+</head>
+<body>
+    <h1>İsmini Yaz ve Özel Resimleri Gör!</h1>
+    <input type="text" id="username" placeholder="Adını yaz..." />
+    <button onclick="showImages()">Göster</button>
+
+    <div id="images"></div>
+
+    <!-- Modal for displaying large image -->
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <div class="modal-content-wrapper">
+            <img id="modalImg" class="modal-content" onclick="event.stopPropagation()">
+            <div id="imageDetails" class="image-details"></div>
+        </div>
+    </div>
+
+    <script>
+        function showImages() {
+            const username = document.getElementById("username").value.trim().toLowerCase();
+            const imagesDiv = document.getElementById("images");
+            const body = document.body;
+            const userImages = {
+                "rabisim": [
+                    { url: "https://i.hizliresim.com/mjznnoa.jpg", caption: "Rabisim - 1" },
+                    { url: "https://i.hizliresim.com/qfy2du6.jpg", caption: "Rabisim - 2" },
+                    { url: "https://i.hizliresim.com/jx3ghc6.jpg", caption: "Rabisim - 3" },
+                    { url: "https://i.hizliresim.com/qibkjw7.jpg", caption: "Rabisim - 4" },
+                    { url: "https://i.hizliresim.com/ccfxn17.jpg", caption: "Rabisim - 5" },
+                    { url: "https://i.hizliresim.com/9e8nl3w.jpg", caption: "Rabisim - 6" }
+                ],
+                "zey": [
+                    { url: "https://i.hizliresim.com/36ubso9.jpg", caption: "Zey - 1" },
+                    { url: "https://i.hizliresim.com/mry588y.jpg", caption: "Zey - 2" },
+                    { url: "https://i.hizliresim.com/spf8gzv.jpg", caption: "Zey - 3" },
+                    { url: "https://i.hizliresim.com/gq4negu.jpg", caption: "Zey - 4" },
+                    { url: "https://i.hizliresim.com/hd7tayn.jpg", caption: "Zey - 5" },
+                    { url: "https://i.hizliresim.com/p8u04c6.jpg", caption: "Zey - 6" }
+                ],
+                "kaya": [
+                    { url: "https://i.hizliresim.com/gb6vklg.jpg", caption: "Kaya - 1" },
+                    { url: "https://i.hizliresim.com/ap1cq2i.jpg", caption: "Kaya - 2" },
+                    { url: "https://i.hizliresim.com/33l9iwz.jpg", caption: "Kaya - 3" },
+                    { url: "https://i.hizliresim.com/7lyp8t5.jpg", caption: "Kaya - 4" },
+                    { url: "https://i.hizliresim.com/jkhz32u.jpg", caption: "Kaya - 5" },
+                    { url: "https://i.hizliresim.com/i7rdml8.jpg", caption: "Kaya - 6" },
+                    { url: "https://i.hizliresim.com/6xfzvhz.jpg", caption: "Kaya - 7" },
+                    { url: "https://i.hizliresim.com/9nmf7n3.jpg", caption: "Kaya - 8" },
+                    { url: "https://i.hizliresim.com/fa520s2.jpg", caption: "Kaya - 9" }
+                ],
+                "enes": [
+                    { url: "https://i.hizliresim.com/rikojet.jpg", caption: "Enes - 1" },
+                    { url: "https://i.hizliresim.com/g35ep9l.jpg", caption: "Enes - 2" },
+                    { url: "https://i.hizliresim.com/3lnmrhd.jpg", caption: "Enes - 3" },
+                    { url: "https://i.hizliresim.com/ig189a9.jpg", caption: "Enes - 4" },
+                    { url: "https://i.hizliresim.com/qwfwsxq.jpg", caption: "Enes - 5" },
+                    { url: "https://i.hizliresim.com/k3c0skr.jpg", caption: "Enes - 6" },
+                    { url: "https://i.hizliresim.com/g9hd5ss.jpg", caption: "Enes - 7" }
+                ],
+                "efe": [
+                    { url: "https://i.hizliresim.com/ij7hrd6.jpg", caption: "Efe - 1" },
+                    { url: "https://i.hizliresim.com/cpourw3.jpg", caption: "Efe - 2" },
+                    { url: "https://i.hizliresim.com/kyceqhp.jpg", caption: "Efe - 3" },
+                    { url: "https://i.hizliresim.com/nldhi76.jpg", caption: "Efe - 4" },
+                    { url: "https://i.hizliresim.com/7a1eosk.jpg", caption: "Efe - 5" }
+                ],
+                "ebu": [
+                    { url: "https://i.hizliresim.com/9h1jpml.jpg", caption: "Ebu - 1" },
+                    { url: "https://i.hizliresim.com/lfu32aj.jpg", caption: "Ebu - 2" },
+                    { url: "https://i.hizliresim.com/ikpjfzz.jpg", caption: "Ebu - 3" },
+                    { url: "https://i.hizliresim.com/rbxq3dk.jpg", caption: "Ebu - 4" },
+                    { url: "https://i.hizliresim.com/jy3anh2.jpg", caption: "Ebu - 5" },
+                    { url: "https://i.hizliresim.com/4kkyoyf.jpg", caption: "Ebu - 6" },
+                    { url: "https://i.hizliresim.com/i74p4y1.jpg", caption: "Ebu - 7" },
+                    { url: "https://i.hizliresim.com/4x2isa3.jpg", caption: "Ebu - 8" },
+                    { url: "https://i.hizliresim.com/7yhjluk.jpg", caption: "Ebu - 9" },
+        
+                ],
+                "nisa": [
+                    { url: "https://i.hizliresim.com/c6wl40h.jpg", caption: "Nisa - 1" },
+                    { url: "https://i.hizliresim.com/kosr5zu.jpg", caption: "Nisa - 2" },
+                    { url: "https://i.hizliresim.com/m4ha08q.jpg", caption: "Nisa - 3" },
+                    { url: "https://i.hizliresim.com/er4jp91.jpg", caption: "Nisa - 4" },
+                    { url: "https://i.hizliresim.com/lgzbv9b.jpg", caption: "Nisa - 5" },
+                    { url: "https://i.hizliresim.com/10zci3o.jpg", caption: "Nisa - 6" },
+                    { url: "https://i.hizliresim.com/lps1939.jpg", caption: "Nisa - 7" },
+                    { url: "https://i.hizliresim.com/puhylp9.jpg", caption: "Nisa - 8" },
+                    { url: "https://i.hizliresim.com/ik2nw6g.jpg", caption: "Nisa - 9" }
+                ]
+            };
+
+            // Clear previous images
+            imagesDiv.innerHTML = "";
+
+            if (userImages[username]) {
+                body.className = username; // Apply the background color based on username
+                userImages[username].forEach(image => {
+                    const imgContainer = document.createElement("div");
+                    imgContainer.className = "image-container";
+
+                    const img = document.createElement("img");
+                    img.src = image.url;
+                    img.alt = image.caption;
+                    img.onclick = function() {
+                        openModal(image.url, image.caption);
+                    };
+
+                    const caption = document.createElement("div");
+                    caption.className = "image-caption";
+                    caption.innerText = image.caption;
+
+                    imgContainer.appendChild(img);
+                    imgContainer.appendChild(caption);
+                    imagesDiv.appendChild(imgContainer);
+                });
+            } else {
+                alert("Bu kullanıcı bulunamadı.");
+            }
+        }
+
+        function openModal(imageUrl, caption) {
+            const modal = document.getElementById("myModal");
+            const modalImg = document.getElementById("modalImg");
+            const imageDetails = document.getElementById("imageDetails");
+
+            modal.style.display = "block";
+            modalImg.src = imageUrl;
+            imageDetails.innerText = caption;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
