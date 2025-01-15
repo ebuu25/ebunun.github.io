@@ -468,21 +468,9 @@
             alert(`Hoş geldin, ${data.name}`);
             // Burada kullanıcı bilgilerini işleyebilir ve sunucunuza gönderebilirsiniz.
         }
-
-        window.onload = function () {
-            google.accounts.id.initialize({
-                client_id: "YOUR_GOOGLE_CLIENT_ID", // Buraya kendi istemci kimliğinizi ekleyin
-                callback: handleCredentialResponse
-            });
-            google.accounts.id.renderButton(
-                document.getElementById("signInDiv"), // Butonun yerleşeceği öğe
-                { theme: "outline", size: "large" } // Butonun tasarımı
-            );
-            google.accounts.id.prompt(); // Otomatik giriş için
-        };
     </script>
-</head>
-<body>
+</body>
+</html>
 
 
 
